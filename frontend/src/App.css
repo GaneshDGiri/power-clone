@@ -1,0 +1,269 @@
+/* src/App.css */
+:root {
+  --primary: #0078d4; /* Power BI Blue */
+  --primary-hover: #106ebe;
+  --bg-color: #f3f2f1;
+  --sidebar-bg: #ffffff;
+  --card-bg: #ffffff;
+  --text-primary: #323130;
+  --text-secondary: #605e5c;
+  --border-color: #e1dfdd;
+  --sidebar-width: 280px;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+}
+
+/* --- Layout Architecture --- */
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  transition: transform 0.3s ease;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.upload-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  transition: background 0.2s;
+}
+
+.upload-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.section-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.dataset-list {
+  list-style: none;
+  overflow-y: auto;
+}
+
+.dataset-item {
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.2s;
+  font-size: 0.95rem;
+}
+
+.dataset-item:hover {
+  background-color: #f3f9fd;
+  color: var(--primary);
+}
+
+.dataset-item.active {
+  background-color: #eff6fc;
+  color: var(--primary);
+  font-weight: 600;
+  border-left: 3px solid var(--primary);
+}
+
+/* --- Main Content Area --- */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- Top Toolbar (Control Panel) --- */
+.toolbar {
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.control-group label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.control-select {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: rgb(143, 174, 123);
+  min-width: 140px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.control-select:focus {
+  border-color: var(--primary);
+}
+
+.add-widget-btn {
+  margin-left: auto; /* Push to right */
+  background-color: #107c10; /* Excel Green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.add-widget-btn:hover {
+  background-color: #0b5a0b;
+}
+
+/* --- Dashboard Canvas --- */
+.dashboard-canvas {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.empty-state {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  margin: 1rem;
+}
+
+/* --- Widget Grid (Responsive Masonry) --- */
+.widget-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.widget-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.widget-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.widget-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sidebar .section-title, 
+  .sidebar .dataset-list {
+    display: none; /* Hide list on mobile for simplicity, or add toggle */
+  }
+
+  .logo { margin-bottom: 0; }
+  .upload-btn { margin-bottom: 0; padding: 8px; }
+  
+  .toolbar {
+    padding: 1rem;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+  
+  .add-widget-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .widget-grid {
+    grid-template-columns: 1fr; /* Stack cards on mobile */
+  }
+}
